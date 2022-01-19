@@ -27,8 +27,12 @@ app.get('/filmer', (req, res) => {
 app.get('/film/:id', async (req, res) => {
   const movieData = await dataLoader.loadMovie(req.params.id);
   console.log(movieData);
-
-  res.render('movie', { menuItems: menuItems, movie: movieData });
+  if (movieData) {
+    res.render('movie', { menuItems: menuItems, movie: movieData });
+  } else {
+    res.status(404);
+    res.render('404');
+  }
 });
 
 app.use(express.static('./public'));
