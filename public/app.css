@@ -1,0 +1,11 @@
+.menuContainer {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: #aaaaaa;
+  font-size: 2rem;
+}
