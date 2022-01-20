@@ -1,7 +1,7 @@
 <div class="moviesListContainer">
   {{#each movies}}
-    <a href="/movie/{{this.id}}">
-      <div class="moviesListmovieContainer">
+    <a class="moviesListLink" href="/movie/{{this.id}}">
+      <div class="moviesListMovieContainer">
         <h2 class="movieTitle">
           {{this.attributes.title}}
         </h2>
