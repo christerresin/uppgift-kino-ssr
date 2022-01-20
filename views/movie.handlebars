@@ -1,9 +1,11 @@
 <div class='movieContainer'>
+  {{#if movie.attributes.image.url}}
   <div
     class='movieImage'
     style='background-image: url({{movie.attributes.image.url}});'
   >
   </div>
+  {{/if}}
   <div class="movieInformationContainer">
     <h3 class="movieInformationTitle">
       {{movie.attributes.title}}

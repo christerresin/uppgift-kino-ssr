@@ -1,15 +1,15 @@
-<div class="moviesListContainer">
+<div class='moviesListContainer'>
   {{#if movies}}
     {{#each movies}}
-      <a class="moviesListLink" href="/movie/{{this.id}}">
-        <div class="moviesListMovieContainer">
+      <a class='moviesListLink' href='/movie/{{this.id}}'>
+        <div class='moviesListMovieContainer'>
           <div
-            class="movieCoverImage"
-            style="background-image: url({{this.attributes.image.url}});"
+            class='movieCoverImage'
+            style='background-image: url({{this.image}});'
           >
           </div>
-          <h2 class="movieTitle">
-            {{this.attributes.title}}
+          <h2 class='movieTitle'>
+            {{this.title}}
           </h2>
 
         </div>
