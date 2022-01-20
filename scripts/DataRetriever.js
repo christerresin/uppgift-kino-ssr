@@ -2,18 +2,20 @@ import fetch from 'node-fetch';
 
 export default class DataRetriever {
   constructor() {}
+  trimData(movie) {
+    return {
+      id: movie.id,
+      ...movie.attributes,
+      image: movie.attributes.image.url,
+    };
+  }
+
   async loadMovies() {
     const API_URL = 'https://lernia-kino-cms.herokuapp.com/api/movies';
     try {
       const dataBuff = await fetch(API_URL);
       const moviesData = await dataBuff.json();
-      const movies = moviesData.data.map((movie) => {
-        return {
-          id: movie.id,
-          ...movie.attributes,
-          image: movie.attributes.image.url,
-        };
-      });
+      const movies = moviesData.data.map(this.trimData);
       return movies;
     } catch (error) {
       console.log(error);
@@ -26,12 +28,7 @@ export default class DataRetriever {
 
       const dataBuff = await fetch(API_URL);
       const movieData = await dataBuff.json();
-      return {
-        id: movieData.data.id,
-        ...movieData.data.attributes,
-        image: movieData.data.attributes.image.url,
-      };
-      return movieData.data;
+      return this.trimData(movieData.data);
     } catch (error) {
       console.log(error);
     }
