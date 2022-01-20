@@ -3,14 +3,15 @@
     {{#each movies}}
       <a class="moviesListLink" href="/movie/{{this.id}}">
         <div class="moviesListMovieContainer">
-          <h2 class="movieTitle">
-            {{this.attributes.title}}
-          </h2>
           <div
             class="movieCoverImage"
             style="background-image: url({{this.attributes.image.url}});"
           >
           </div>
+          <h2 class="movieTitle">
+            {{this.attributes.title}}
+          </h2>
+
         </div>
       </a>
     {{/each}}
