@@ -4,24 +4,27 @@ import { marked } from "marked";
 import DataRetriever from "./scripts/DataRetriever.js";
 
 const app = express();
+const port = process.env.PORT || 5080;
+const dataLoader = new DataRetriever();
 
+// Handlebars setup
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-const dataLoader = new DataRetriever();
-const moviesData = await dataLoader.loadMovies();
-
+// Menu in site header
 const menuItems = [
   { label: "Home", link: "/" },
   { label: "Movies", link: "/movies" },
 ];
 
+// Routing
 app.get("/", (req, res) => {
   res.render("home", { menuItems: menuItems });
 });
 
-app.get("/movies", (req, res) => {
+app.get("/movies", async (req, res) => {
+  const moviesData = await dataLoader.loadMovies();
   res.render("movies", { menuItems: menuItems, movies: moviesData });
 });
 
@@ -41,7 +44,11 @@ app.get("/movie/:id", async (req, res) => {
   }
 });
 
+// Middleware
 app.use(express.static("./public"));
 app.use("/movie", express.static("./public"));
 
-app.listen(5080);
+// Server
+app.listen(port, () => {
+  console.log(`Server listening on port: ${port}`);
+});
