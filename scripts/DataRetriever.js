@@ -10,7 +10,7 @@ export default class DataRetriever {
       const movies = moviesData.data.map((movie) => {
         return {
           id: movie.id,
-          title: movie.attributes.title,
+          ...movie.attributes,
           image: movie.attributes.image.url,
         };
       });
@@ -26,6 +26,11 @@ export default class DataRetriever {
 
       const dataBuff = await fetch(API_URL);
       const movieData = await dataBuff.json();
+      return {
+        id: movieData.data.id,
+        ...movieData.data.attributes,
+        image: movieData.data.attributes.image.url,
+      };
       return movieData.data;
     } catch (error) {
       console.log(error);

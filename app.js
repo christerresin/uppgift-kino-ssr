@@ -32,7 +32,7 @@ app.get('/movies', async (req, res) => {
 app.get('/movie/:id', async (req, res) => {
   const movieData = await dataLoader.loadMovie(req.params.id);
   if (movieData) {
-    const introMarked = marked.parse(movieData.attributes.intro);
+    const introMarked = marked.parse(movieData.intro);
 
     res.render('movie', {
       menuItems: menuItems,
