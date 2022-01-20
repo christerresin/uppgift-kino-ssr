@@ -4,7 +4,6 @@ import { marked } from 'marked';
 import DataRetriever from './scripts/DataRetriever.js';
 
 const app = express();
-const port = process.env.PORT || 5080;
 const dataLoader = new DataRetriever();
 
 // Handlebars setup
@@ -49,7 +48,4 @@ app.get('/movie/:id', async (req, res) => {
 app.use(express.static('./public'));
 app.use('/movie', express.static('./public'));
 
-// Server
-app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`);
-});
+export default app;

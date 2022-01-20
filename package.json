@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "description": "server side rendered movie site",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "dev": "nodemon app.js",
-    "start": "node app.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "jest": "^27.4.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
