@@ -24,14 +24,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', async (req, res) => {
-  const moviesData = await dataLoader.loadMovies();
-  const movies = moviesData.map((movie) => {
-    return {
-      id: movie.id,
-      title: movie.attributes.title,
-      image: movie.attributes.image.url,
-    };
-  });
+  const movies = await dataLoader.loadMovies();
+
   res.render('movies', { menuItems: menuItems, movies: movies });
 });
 

@@ -1,13 +1,20 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
 export default class DataRetriever {
   constructor() {}
   async loadMovies() {
-    const API_URL = "https://lernia-kino-cms.herokuapp.com/api/movies";
+    const API_URL = 'https://lernia-kino-cms.herokuapp.com/api/movies';
     try {
       const dataBuff = await fetch(API_URL);
       const moviesData = await dataBuff.json();
-      return moviesData.data;
+      const movies = moviesData.data.map((movie) => {
+        return {
+          id: movie.id,
+          title: movie.attributes.title,
+          image: movie.attributes.image.url,
+        };
+      });
+      return movies;
     } catch (error) {
       console.log(error);
     }
