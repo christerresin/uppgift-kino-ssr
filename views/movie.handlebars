@@ -9,6 +9,9 @@
       {{movie.attributes.title}}
     </h3>
     <div class="movieIntro">
-      {{movie.attributes.intro}}
+      {{#noop}}
+      {{introMarked}}
+
+      {{/noop}}
     </div>
 </div>

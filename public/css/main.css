@@ -27,14 +27,18 @@
 .movieContainer {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 100%;
 }
 
 .movieImage {
-  height: 20rem;
-  width: 16rem;
+  height: 400px;
+  width: 300px;
   background-position: center;
   background-size: cover;
   margin-right: 1rem;
+}
+
+.movieInformationContainer {
+  width: 80%;
 }

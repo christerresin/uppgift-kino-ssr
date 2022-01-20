@@ -1,5 +1,6 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
+import { marked } from 'marked';
 import DataRetriever from './scripts/DataRetriever.js';
 
 const app = express();
@@ -26,9 +27,13 @@ app.get('/filmer', (req, res) => {
 
 app.get('/film/:id', async (req, res) => {
   const movieData = await dataLoader.loadMovie(req.params.id);
-  console.log(movieData);
+  const introMarked = marked.parse(movieData.attributes.intro);
   if (movieData) {
-    res.render('movie', { menuItems: menuItems, movie: movieData });
+    res.render('movie', {
+      menuItems: menuItems,
+      movie: movieData,
+      introMarked: introMarked,
+    });
   } else {
     res.status(404);
     res.render('404');
