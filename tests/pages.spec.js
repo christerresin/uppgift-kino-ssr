@@ -33,7 +33,7 @@ test("404 page and code when accessing movie page outside API entrys", async () 
 test("returns the data for movie with id 1", async () => {
   const dataLoader = new DataRetriever();
   const movieData = await dataLoader.loadMovie(1);
-  expect(movieData.title.includes("Shawshank"));
+  expect(movieData.title.includes("Shawshank")).toBeTruthy();
 });
 
 test("returns array of data from API", async () => {
@@ -43,12 +43,15 @@ test("returns array of data from API", async () => {
   // Check API data for expected keys in movies object
   const movieKeys = ["id", "title", "image", "intro"];
   const keysCheckedArr = moviesArr.filter((movie) => {
+    let passed;
     for (let i = 0; i < movieKeys.length; i++) {
       if (!movie.hasOwnProperty(movieKeys[i])) {
-        return false;
+        passed = false;
+        break;
       }
+      passed = true;
     }
-    return true;
+    return passed;
   });
-  expect(moviesArr.length === keysCheckedArr.length);
+  expect(moviesArr.length == keysCheckedArr.length).toBeTruthy();
 });
