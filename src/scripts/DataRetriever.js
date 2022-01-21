@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import fetch from "node-fetch";
 
 export default class DataRetriever {
   constructor() {}
@@ -11,7 +11,7 @@ export default class DataRetriever {
   }
 
   async loadMovies() {
-    const API_URL = 'https://lernia-kino-cms.herokuapp.com/api/movies';
+    const API_URL = "https://lernia-kino-cms.herokuapp.com/api/movies";
     try {
       const dataBuff = await fetch(API_URL);
       const moviesData = await dataBuff.json();
