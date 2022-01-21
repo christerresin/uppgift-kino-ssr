@@ -15,18 +15,17 @@ test("movies page shows list of movies", async () => {
   expect(response.text.includes("Godfather")).toBeTruthy();
 });
 
-test("movie page loads, has movie title and image", async () => {
-  const response = await request(app)
-    .get("/movie/10")
-    .expect(200)
-    .then((response) => {
-      console.log(response);
-      return response;
-    });
+test("movie page loads, has movie title, intro and image", async () => {
+  const response = await request(app).get("/movie/10").expect(200);
   expect(response.text.includes("Threat")).toBeTruthy();
   const testKeyWords = ["background-image", "media-amazon", "/images/", ".jpg"];
   expect(
     testKeyWords.every((word) => response.text.includes(word))
   ).toBeTruthy();
   expect(response.text.includes("imdb")).toBeTruthy();
+});
+
+test("404 page and code when accessing movie page outside API entrys", async () => {
+  const response = await request(app).get("/movie/x9x").expect(404);
+  expect(response.text.includes("404")).toBeTruthy();
 });
