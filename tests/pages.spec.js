@@ -1,6 +1,7 @@
 import { response } from "express";
 import request from "supertest";
 import app from "../src/app.js";
+import DataRetriever from "../src/scripts/DataRetriever.js";
 
 test("home page loads", async () => {
   const response = await request(app).get("/").expect(200);
@@ -28,4 +29,10 @@ test("movie page loads, has movie title, intro and image", async () => {
 test("404 page and code when accessing movie page outside API entrys", async () => {
   const response = await request(app).get("/movie/x9x").expect(404);
   expect(response.text.includes("404")).toBeTruthy();
+});
+
+test("returns the data for movie with id 1", async () => {
+  const dataLoader = new DataRetriever();
+  const movieData = await dataLoader.loadMovie(1);
+  expect(movieData.title.includes("Shawshank"));
 });
