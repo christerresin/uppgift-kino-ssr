@@ -1,4 +1,3 @@
-import { response } from "express";
 import request from "supertest";
 import app from "../src/app.js";
 import DataRetriever from "../src/scripts/DataRetriever.js";
@@ -37,9 +36,18 @@ test("returns the data for movie with id 1", async () => {
   expect(movieData.title.includes("Shawshank"));
 });
 
-test("returns json/object with arrays of data from API", async () => {
+test("returns array of data from API", async () => {
   const dataLoader = new DataRetriever();
   const moviesArr = await dataLoader.loadMovies();
   expect(moviesArr.length > 1);
-  console.log(moviesArr.length);
+  const movieKeys = ["id", "title", "image", "intro"];
+  const keysCheckedArr = moviesArr.filter((movie) => {
+    for (let i = 0; i < movieKeys.length; i++) {
+      if (!movie.hasOwnProperty(movieKeys[i])) {
+        return false;
+      }
+    }
+    return true;
+  });
+  expect(moviesArr.length === keysCheckedArr.length);
 });
