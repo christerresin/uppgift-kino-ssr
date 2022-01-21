@@ -40,6 +40,7 @@ test("returns array of data from API", async () => {
   const dataLoader = new DataRetriever();
   const moviesArr = await dataLoader.loadMovies();
   expect(moviesArr.length > 1);
+  // Check API data for expected keys in movies object
   const movieKeys = ["id", "title", "image", "intro"];
   const keysCheckedArr = moviesArr.filter((movie) => {
     for (let i = 0; i < movieKeys.length; i++) {
