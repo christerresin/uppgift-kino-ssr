@@ -1,5 +1,15 @@
-<div class='menuContainer'>
-  {{#each menuItems}}
-    <a href='{{this.link}}' class='menuItem'>{{this.label}}</a>
-  {{/each}}
+<div class="header">
+  <div class="headerLogo">
+    <a href="/">
+      <h1 style="color: white">KINO</h1>
+      <p style="color: white">PÅ MARS</p>
+    </a>
+  </div>
+  <nav class="headerNav">
+    <ul class="headerNavMenu">
+      {{#each menuItems}}
+        <li><a href="{{this.link}}" class="menuItem">{{this.label}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
 </div>
