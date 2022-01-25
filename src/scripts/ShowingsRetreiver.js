@@ -1,13 +1,14 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
 
-const API_BASEURL = "https://lernia-kino-cms.herokuapp.com/api";
+const API_BASEURL =
+  'https://lernia-kino-cms.herokuapp.com/api/screenings?populate=movie';
 
 const trimData = async (screening) => {
-  console.log(screening);
-
-  const movieTitle = await addMovieTitle(screening);
   return {
     id: screening.id,
+    title: screening.attributes.movie.data.attributes.title,
+    movieId: screening.attributes.movie.data.id,
+    image: screening.attributes.movie.data.attributes.image.url,
     ...screening.attributes,
   };
 };
@@ -47,15 +48,6 @@ const sortScreeningsByDate = (screenings) => {
   return sortedScreenings;
 };
 
-const addMovieTitle = async (screening) => {
-  const movieId = screening.id;
-  const dataBuff = await fetch(API_BASEURL + `/movies/${movieId}`);
-  const data = await dataBuff.json();
-  const movieData = await data.data;
-  const movieTitle = movieData.attributes.title;
-  return movieTitle;
-};
-
 const filterByUpomingScreenings = (arr, days) => {
   const todaysDate = new Date();
   const ms = new Date().getTime() + 86400000 * days;
@@ -76,7 +68,7 @@ const filterByUpomingScreenings = (arr, days) => {
 };
 
 const getUpcomingScreenings = async () => {
-  const dataBuff = await fetch(API_BASEURL + "/screenings");
+  const dataBuff = await fetch(API_BASEURL);
   const data = await dataBuff.json();
   const screeningsData = await data.data;
 
